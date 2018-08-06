@@ -84,16 +84,19 @@ export const authorizePassword = ( auth ) => ( { authActions } ) => {
   } else {
     Object.assign(form, {username}, {password})
 
-    if (clientId && clientSecret) {
-     switch (passwordType) {
-       case "query":
-         Object.assign(query, {client_id: clientId}, {client_secret: clientSecret})
-         break
+    if ( clientId && clientSecret ) {
+      switch ( passwordType ) {
+        case "query":
+          Object.assign(query, {client_id: clientId}, {client_secret: clientSecret})
+          break
+
         case "request-body":
-         Object.assign(form, {client_id: clientId}, {client_secret: clientSecret})
-         break
-       default:
+          Object.assign(form, {client_id: clientId}, {client_secret: clientSecret})
+          break
+
+        default:
           headers.Authorization = "Basic " + btoa(clientId + ":" + clientSecret)
+      }
     }
   }
 
